@@ -1,358 +1,289 @@
-# Google Antigravity Prompt — Tiệm Cơm Tấm
+# Google Antigravity — Execute the approved Tiệm Cơm Tấm implementation
 
 ## Objective
-Build a production-ready Vietnamese web game **“Tiệm Cơm Tấm / Cơm Tấm Sài Gòn”** and push the completed code to:
 
-- Target repo: https://github.com/dhtoan/tiem-com-tam
-- Target branch: `main`
+Implement the complete production-ready **Tiệm Cơm Tấm / Cơm Tấm Sài Gòn** game in:
 
-The target repository is currently empty, but always inspect it first. If files appear before you start, preserve and extend them; do not destructively overwrite existing work.
+`https://github.com/dhtoan/tiem-com-tam`
 
-You are explicitly authorized to commit and push changes to **dhtoan/tiem-com-tam** after verification. Do **not** modify the reference repositories. Do not deploy to a live Cloudflare account unless separately authorized; prepare the project so deployment is ready.
+The product/design spec and implementation plans are already approved. Treat them as the source of truth. Do not redesign the product unless an implementation blocker proves a spec conflict.
 
-## Source material to inspect before coding
+## Read first — required
 
-### Primary code references
-1. https://github.com/dhtoan/tiem-mi-cay
-   - Reuse architectural patterns, not branding/assets.
-   - Study Cloudflare Workers + D1, account/auth, revisioned cloud save, same-origin API/static serving, leaderboard/challenge endpoints, PWA/offline behavior, build/deploy scripts, security headers, smoke tests, CI and one-click Cloudflare deployment.
+Before editing code, read these files in the target repository in this order:
 
-2. https://github.com/dhtoan/banhmi
-   - Study the cozy Vietnamese food-game loop and UX patterns.
-   - Reuse concepts such as ingredient stock, recipes, customer queue/orders, day progression, restock/unlock economy, local save, recipe/help UI, sound/music lifecycle and PWA behavior.
-   - Do not copy its copyrighted visual identity or third-party assets blindly.
+1. `docs/superpowers/specs/2026-09-28-tiem-com-tam-story-systems-design.md`
+2. `docs/superpowers/plans/2026-09-28-00-tiem-com-tam-master-roadmap.md`
+3. `docs/superpowers/plans/2026-09-28-01-foundation-day1-vertical-slice.md`
+4. `docs/superpowers/plans/2026-09-28-02-economy-management-systems.md`
+5. `docs/superpowers/plans/2026-09-28-03-security-neighborhood-incident-systems.md`
+6. `docs/superpowers/plans/2026-09-28-04-living-stall-director-campaign-endings.md`
+7. `docs/superpowers/plans/2026-09-28-05-cloud-online-pwa.md`
+8. `docs/superpowers/plans/2026-09-28-06-content-media-localization-audio.md`
+9. `docs/superpowers/plans/2026-09-28-07-balance-qa-release.md`
 
-### Historical Cơm Tấm requirements
-3. https://github.com/dhtoan/com-tam
-   - Treat this as the historical approved product/spec source from previous work, especially `docs/superpowers/specs/` and `docs/superpowers/plans/`.
-   - Preserve the approved scope: TypeScript + Phaser 3 + DOM/CSS, Vite, no React, Cloudflare Workers + D1, PWA/offline local play, bilingual Vietnamese/English, 30 authored campaign days + Day 31+ procedural, about 25 recipes, 23 ingredients, 10 customer archetypes, charcoal grilling, inventory/economy/upgrades/achievements, local + cloud save, Endless/Daily modes and leaderboards.
-   - You may selectively port user-owned implementation ideas/code where useful, but do not simply duplicate the old repo. Rebuild the target deliberately, improve the UI and visual composition, and keep the new repo coherent.
+Also inspect these repositories as **read-only references** before implementation:
 
-## Hard visual reference
+- `https://github.com/dhtoan/tiem-mi-cay`
+- `https://github.com/dhtoan/banhmi`
+- `https://github.com/dhtoan/com-tam`
 
-Use the attached screenshot as the primary composition reference. Create an **original** game scene with the same information hierarchy and overall stall layout, not a pixel-for-pixel copy of third-party artwork.
+Use their proven patterns where helpful, especially Cloudflare/D1, save, auth, game organization, cooking, PWA and tests. Do **not** edit those three reference repositories.
 
-Desktop target: landscape 16:9, approximately 1152×648 / 1280×720, no page scroll during gameplay.
+## Execution mode
 
-### Layout lock
-- Background: cozy hand-painted / illustrated Saigon sidewalk cơm tấm stall, warm daylight, red plastic tables/stools, greenery and neighborhood street ambience.
-- Top-left: cream rounded panel with sun/weather icon, **“Ngày 1”**, clock around **12:44**, plus a pink horizontal day/progress bar.
-- Top-right: three compact controls:
-  - cash chip with green-money icon and value similar to **135.000**
-  - star/reputation chip similar to **25**
-  - gear/settings button
-- Left side:
-  - freestanding menu sign titled **“CƠM TẤM”**
-  - visible example pricing such as Sườn nướng 25K, Bì chả 20K, Thịt nướng 22K, Trứng 5K, Ốp la 5K
-  - charcoal grill below/next to it with sizzling glazed pork chops, glowing coals, tongs, sauce pot and subtle smoke/heat animation
-- Center:
-  - large glass food display case as the focal interaction area
-  - upper row: **Sườn nướng 25.000, Thịt nướng 22.000, Bì heo 5.000, Chả trứng 5.000**
-  - lower row: **Trứng ốp la 5.000, Chả lụa 5.000, Đồ chua 3.000, Mỡ hành 2.000, Dưa leo 2.000, Cà chua 2.000**
-  - each tray looks abundant, appetizing and clearly distinct; labels stay legible
-- Right side:
-  - stack of plates, chopsticks/utensils, condiments
-  - large rice pot full of broken rice with label **“Cơm tấm 3.000”**
-- Bottom foreground:
-  - serving counter spanning the screen
-  - plate assembly area with a floral plate
-  - cutting board with cooked pork
-  - small bowl of scallion oil
-  - red/pink cleaning towel
-  - the player’s currently assembled plate is always easy to see
-- Overall tone: charming, tactile, Vietnamese, cozy, premium casual mobile/web game; rounded cream UI cards with brown outline and subtle shadow.
+Execute the approved plans sequentially:
 
-Do not use emoji as final in-game food art. Emoji are allowed only as temporary development fallbacks and must be replaced before completion.
+`01 → 02 → 03 → 04 → 05 → 06 → 07`
 
-## Technical architecture — required
-- **TypeScript**
-- **Phaser 3** for the live game scene, animations, input and game-state presentation
-- **DOM/CSS** for menus, settings, account, modal sheets, accessibility and responsive overlays
-- **Vite**
-- **No React**
-- **Cloudflare Workers + D1**
-- Same-origin frontend + API
-- PWA manifest + service worker
-- Guest/local save must work offline
-- Logged-in revisioned cloud save
-- Vitest + Playwright or equivalent local automated tests
-- GitHub Actions CI
-- Node 20+ compatible
-- All runtime assets local to the repo; no fragile third-party hotlinks
+Continue autonomously through the plans without asking for confirmation between ordinary tasks.
 
-Keep systems modular. Avoid a single huge HTML/JS file.
+If the Superpowers execution skills are available, use **subagent-driven-development** as the preferred execution mode; otherwise execute the same plans natively task-by-task. Follow TDD: failing test → minimal implementation → passing test → review → commit.
 
-Suggested structure:
-```
-src/
-  game/
-    scenes/
-    systems/
-    data/
-    ui/
-    audio/
-    assets/
-  client/
-  worker/
-public/
-  assets/
-  audio/
-  icons/
-migrations/
-tests/
-docs/
-scripts/
-```
+Do not skip plan exit gates.
 
-## Core game loop
-Implement an actually playable loop, not a static mockup:
+## Repository rules
 
-1. **Prep / restock**
-   - inspect stock, buy ingredients, unlock items/upgrades
-2. **Open stall**
-   - customers arrive with visible patience
-   - order appears clearly in Vietnamese or English based on selected language
-3. **Cook**
-   - raw pork/grilled meat goes to charcoal grill
-   - cooking state progresses through raw → cooking → perfect → overcooked → burnt
-   - player must flip/remove at the right time
-4. **Plate**
-   - add broken rice
-   - add requested protein and sides/toppings
-   - support click/tap and drag interactions
-5. **Serve**
-   - validate order accuracy, doneness and speed
-   - show concise feedback, stars/tip/combo
-6. **Day close**
-   - revenue, ingredient cost, rent/expenses, rating, goals and unlock progress
-7. **Next day**
-   - difficulty and recipe complexity increase gradually
-
-The player should understand Day 1 without reading a long tutorial. Use contextual coach marks and small prompts.
-
-## Content requirements
-Preserve the approved historical scope from `dhtoan/com-tam`:
-- 30 hand-authored campaign days
-- procedural Day 31+
-- ~25 recipes
-- 23 ingredients
-- 10 customer archetypes
-- Vietnamese + English
-- achievements
-- upgrades
-- inventory
-- rating/reputation
-- combos
-- daily objectives
-- unlock progression
-
-At minimum, Day 1 must use the screenshot ingredients and common cơm tấm combinations such as:
-- cơm sườn
-- cơm thịt nướng
-- cơm sườn bì
-- cơm sườn chả
-- cơm sườn bì chả
-- optional trứng ốp la
-- đồ chua, mỡ hành, dưa leo, cà chua
-
-Use the existing approved spec in `dhtoan/com-tam` as the canonical source for the full catalog rather than inventing conflicting values.
-
-## Customer and order UX
-- queue can hold multiple customers
-- each ticket shows portrait/avatar, requested plate, patience and modifiers
-- customer personalities affect patience/tips/order complexity
-- clear visual distinction between active order and waiting orders
-- serving the wrong dish gives understandable feedback but does not soft-lock the game
-- no modal/popup may trap the user; every modal must have a visible close action, Escape support on desktop, and safe backdrop handling
-
-## Economy
-- use Vietnamese đồng formatting, e.g. `25.000đ`
-- revenue, ingredient cost, rent/operating cost and upgrades must be balanced so progression feels meaningful
-- no impossible Day 1 state
-- prevent negative stock
-- restocking and unlocks must persist
-- data/config should be centralized, not scattered magic numbers
-
-## Backend and account features
-Follow the robust patterns from `tiem-mi-cay`:
-- register/login/logout/me
-- PBKDF2-SHA256 or an equally appropriate WebCrypto password-hashing approach supported by Workers
-- HttpOnly session cookie, SameSite=Lax, Secure on HTTPS
-- server stores session-token hash, not plaintext token
-- local guest save
-- cloud save with monotonically increasing revision
-- return conflict instead of silently overwriting a newer save
-- health endpoint
-- Endless mode API
-- Daily Challenge seeded by date
-- four leaderboard views/endpoints
-- replay-resistant short-lived run/challenge token where appropriate
-- D1 migrations
-- request/body size validation
-- same-origin checks for sensitive writes
-- sensible rate/quota guards
-
-Do not claim anti-cheat is perfect. Keep authoritative server validation around online score submissions where feasible.
-
-## PWA and offline
-- installable PWA
-- service worker with reliable cache versioning
-- the core single-player game must load and play offline after first successful load
-- network-only online/account features must fail gracefully
-- asset caching must not produce permanent stale code
-- no 404s for declared preload assets
-
-## Art/media requirements
-Create a coherent original asset set for the target game:
-- stall/background scene
-- food display case and trays
-- rice pot, plates, chopsticks, grill, tongs, sauce, towel, cutting board
-- all food ingredients and plated variants
-- raw/cooking/perfect/overcooked/burnt meat states
-- 10 customer portraits/archetypes with mood variants
-- UI icons
-- PWA icons
-- small VFX: smoke, heat shimmer, sparkle/perfect, coin/tip, star, wrong-order feedback
-- sound effects for click, ingredient place, grill sizzle, flip, correct serve, wrong serve, money, star, day start/end
-- calm Vietnamese street-food ambience / music only if licensing is clear
-
-Use Antigravity’s available asset-generation capabilities when present. If direct image generation is unavailable, create polished original SVG/Canvas/programmatic assets locally so the game is still complete and no runtime placeholder is missing. Do not hotlink external assets. Preserve license/credits for any third-party media you intentionally use.
-
-## Responsive behavior
-Desktop:
-- show the full stall composition in one view
-- preserve the reference layout hierarchy
-
-Mobile:
-- portrait-friendly focused camera/layout
-- large touch targets
-- allow switching/focusing between grill, display case and plating counter without tiny controls
-- no horizontal browser scrolling
-- maintain the same game state when changing focus/viewport
-
-Tablet should interpolate cleanly.
-
-## Accessibility and UX quality
-- keyboard-accessible DOM controls
-- visible focus states
-- ARIA labels for icon-only buttons
-- minimum comfortable touch targets
-- text contrast high enough against illustrated background
-- respect reduced-motion preference for nonessential animations
-- sound/music toggles
-- Vietnamese should be the default language; English selectable in settings
-
-## Security / production
-Use the safe production ideas from `tiem-mi-cay` without gimmicky “anti-view-source” claims:
-- security headers
-- CSP appropriate for same-origin assets
-- X-Content-Type-Options
-- Referrer-Policy
-- frame-ancestors / clickjacking protection
-- no secrets committed
-- no source maps in production unless explicitly needed
-- validate API inputs
-- do not trust client-submitted score data blindly
-
-## Cloudflare readiness
-Prepare:
-- `wrangler.toml`
-- D1 binding `DB`
-- migrations
-- `npm run db:local`
-- `npm run db:remote`
-- `npm run deploy`
-- README deployment instructions
-- “Deploy to Cloudflare” button/pattern where feasible
-
-Use target naming such as:
-- Worker/database: `tiem-com-tam`
-- suggested workers.dev hostname: `tiem-com-tam.aunomay.workers.dev`
-- optional custom domain documented as `comtam.aunomay.com`
-
-Do not perform a live Cloudflare deployment without separate authorization.
-
-## Testing and visual verification
-Before pushing:
-1. `npm install`
-2. typecheck
-3. lint
-4. unit tests
-5. production build
-6. apply local D1 migrations
-7. run worker/app locally
-8. Playwright/E2E smoke tests for:
-   - app loads
-   - Day 1 starts
-   - ingredient selection works
-   - grill timing works
-   - plate can be served
-   - correct/wrong order paths
-   - day can end
-   - local save reloads
-   - language switch works
-   - register/login/logout
-   - cloud save write/read/revision conflict
-   - leaderboard/daily challenge endpoints
-9. Use the Antigravity browser agent to visually inspect:
-   - desktop ~1152×648 or 1280×720
-   - mobile ~390×844
-   - no overlap, clipping, blocked popups or page scroll
-   - no broken images/404s
-   - no uncaught console errors
-10. Compare desktop composition to the provided reference screenshot and iterate until the grill-left / display-center / rice-right / plating-bottom hierarchy is unmistakable.
-
-Do not report success based only on build output; verify the playable flow in a real browser.
-
-## Git workflow
-- Inspect target repo before writing.
-- Because this target is currently empty, initialize it cleanly on `main`.
-- Make logical commits as major milestones complete.
+- Work only in `dhtoan/tiem-com-tam`.
+- Preserve all approved spec/plan files.
+- Inspect the current repository state before modifying files.
+- Never blindly overwrite existing implementation that appeared after the plan was written; reconcile it with the approved design.
 - Never force-push.
-- Never rewrite history.
-- Do not push failing code.
-- Push final verified work to:
-  `git@github.com:dhtoan/tiem-com-tam.git`
-  or the authenticated HTTPS equivalent.
+- Commit frequently using the commit intent in each plan.
+- Push completed, verified commits to the target repository.
+- Do not commit secrets, `.env`, credentials, API tokens, `node_modules`, temporary generated junk or unbounded test artifacts.
 
-Reference repos are read-only for this task.
+## Authorized actions
 
-## Execution behavior
-Do not stop after producing a plan. Continue autonomously through implementation, asset creation, tests, browser verification, fixes, documentation, commits and push.
+You are authorized to:
 
-You may use multiple Antigravity agents for genuinely independent workstreams such as:
-- gameplay/client
-- backend/D1
-- original art/media
-- tests/QA
+- create and edit project source code;
+- add the dependencies already required by the approved stack/plans;
+- create local D1 migrations and run them locally;
+- create all required original game media/assets if your environment provides media-generation capability;
+- run local builds, tests, linters, typechecks, browser checks, local Worker/D1 and simulations;
+- create/update documentation;
+- commit and push verified work to the target GitHub repository.
 
-Keep one primary agent responsible for integration so parallel work does not diverge.
+You do **not** need confirmation for normal plan-defined edits.
 
-Do not ask for approval for safe local reads, installs of the already-required dependencies, tests, browser checks, commits or the final push to the authorized target repo. Ask only if blocked by missing credentials, a destructive action, an unexpected paid external service, or a live infrastructure deployment.
+## Approval boundary
 
-## Definition of done
-The task is complete only when:
-- the target repo contains a coherent production-oriented codebase
-- the game is genuinely playable from Day 1 through the daily loop
-- the screenshot’s stall composition is clearly reflected in the desktop UI
-- grill, ingredient case, rice and plating are interactive
-- campaign/content systems are present
-- local save + account/cloud save are functional
-- online modes/leaderboards are wired
-- PWA works
-- all declared local assets exist
-- automated checks pass
-- desktop/mobile browser QA passes
-- README explains local dev, testing and Cloudflare deployment
-- code is committed and pushed to `dhtoan/tiem-com-tam`
+Stop and report before:
 
-## Final report
-After the push, return only a concise implementation report containing:
-- final commit SHA
-- GitHub repo link
-- main systems implemented
-- assets/media created
-- test/build/browser verification results
-- any remaining blocker that requires the owner’s action (for example Cloudflare credentials/D1 provisioning)
+- live/remote Cloudflare deployment;
+- creating or changing production Cloudflare resources;
+- using production secrets/credentials;
+- destructive deletion of user data;
+- adding a new runtime dependency not justified by the approved plans;
+- materially changing the approved product scope;
+- any irreversible external action other than the already-authorized GitHub commits/pushes.
 
-Do not provide hidden chain-of-thought. Provide only concise evidence and verification results.
+Local D1 migrations and local Worker testing are authorized.
+
+## Non-negotiable architecture
+
+- TypeScript + Phaser 3 + vanilla DOM/CSS + Vite.
+- No React.
+- Cloudflare Workers + D1 for networked features.
+- Story Mode is local-first and must remain playable offline after initial successful load.
+- Phaser owns stall/game interaction; DOM/CSS owns management UI.
+- Pure domain systems own simulation.
+- Living Stall Director selects events but does not directly mutate economy/inventory.
+- Seeded deterministic randomness; do not scatter `Math.random()`.
+- One blocking overlay at a time through a single OverlayManager.
+- Versioned save schema with migrations.
+- Cloud saves use optimistic revisions and 409 conflicts.
+- VI is default; EN is complete.
+- Mobile uses station focus anchors rather than shrinking the full desktop stall.
+
+## Product locks
+
+The game is about Joy borrowing money from her husband to open a Cơm Tấm Sài Gòn stall and having 30 days to prove the business can work.
+
+Keep all approved story/system decisions, including:
+
+- Easy/Normal/Hard debt = 15M / 30M / 50M.
+- Debt milestones on Days 10, 20 and 30.
+- JD summer-helper progression with only safe tasks.
+- Husband as lender/friendly rival/supporter, not villain.
+- Market, Books/Tax, Security/Theft, Guards, Neighborhood/Police, Family/Debt.
+- Living Stall Director with stress/event budgets and anti-repeat logic.
+- 30 authored days.
+- 12 major campaign decisions.
+- Six deterministic endings.
+- Day 31+ Endless Mode from every ending.
+- Fail-forward behavior instead of ordinary mid-campaign Game Over.
+
+## Visual locks
+
+Desktop stall hierarchy must remain:
+
+- **left:** charcoal grill;
+- **center:** glass food display;
+- **right:** rice/utensil station;
+- **bottom foreground:** plating/service counter.
+
+Art direction is the approved original **hand-painted Vietnamese cozy realism + premium casual management-game UI**.
+
+The reference composition is guidance, not a request to trace another game.
+
+Do not ship:
+
+- placeholder emoji as production art;
+- watermarked media;
+- AI-garbled dynamic text baked into art;
+- inconsistent Joy/JD/husband identities;
+- missing assets;
+- runtime asset 404s.
+
+All media goes through the typed asset manifest/validation pipeline.
+
+If direct media generation is unavailable in your environment, do **not** pretend Plan 06 is complete. Complete everything possible, leave a precise asset manifest/generation checklist, and report the media-generation blocker.
+
+## Day 1 gate
+
+Plan 01 must produce a real vertical slice before broad content/media production.
+
+It must support:
+
+`New Game → Difficulty → Intro/Morning Brief → Prep → Service → Grill → Flip → Plate → Serve → Close → Summary → Save/Reload`
+
+Do not mass-produce full campaign art until Day 1 passes its visual and interaction gate.
+
+## Verification discipline
+
+Run the exact checks defined by each plan.
+
+Do not disable tests to obtain a green build.
+
+At the final release gate, run the repository equivalents of:
+
+```bash
+npm ci
+npm run typecheck
+npm run lint
+npm run test:run
+npm run validate:assets
+npm run validate:content
+npm run build
+npm run db:local
+npm run test:e2e
+```
+
+Also run the campaign simulation and Director fuzz checks defined in Plan 07.
+
+Use real browser verification for desktop and mobile; passing unit tests alone is insufficient.
+
+Production verification targets include:
+
+- Day 1–30 traversable;
+- Day 31 Endless from all six endings;
+- approximately 25 recipes;
+- 23 ingredients;
+- 10 gameplay customer archetypes;
+- 12 major decisions;
+- six endings;
+- no production placeholder media;
+- asset 404 count = 0;
+- uncaught JS errors = 0;
+- unhandled promise rejections = 0;
+- no Blocker/Critical/Major known release bugs.
+
+If any check cannot be run because of environment/tool limitations, mark it **NOT RUN** with the exact reason. Never report PASS without evidence.
+
+## Browser/UX regressions to guard explicitly
+
+Verify all of these:
+
+- desktop stall composition;
+- mobile station switching at 390×844 and ~360px wide;
+- no horizontal page scroll;
+- Settings/JD/Market/Debt/Books/Dialogue/Event overlays can always close;
+- closing overlays restores game interaction and focus;
+- Standard Slow Time, Extra Slow Time, Auto Pause and No Timed Decisions;
+- offline Story Mode after initial load;
+- cloud-save revision conflict;
+- no blank screen when auth/network requests fail.
+
+## Media/audio rules
+
+For generated media:
+
+- preserve locked character identities;
+- use the shared style bible/prefix;
+- maintain plate perspective;
+- generate distinct cooking states rather than simple tint swaps;
+- keep dynamic text rendered by the game, not baked into art;
+- record licensing for any non-original third-party media;
+- use audio buses/controllers and avoid unbounded loop instances.
+
+## Progress and stop conditions
+
+After each plan:
+
+1. run its exit-gate verification;
+2. fix failures within scope;
+3. commit and push verified work;
+4. record a concise milestone status.
+
+Continue to the next plan automatically when the gate passes.
+
+Stop early only when:
+
+- a required external credential/action falls outside authorization;
+- a required tool/capability is genuinely unavailable and prevents further meaningful work;
+- the approved spec contains an irreconcilable technical contradiction;
+- repeated verification failure remains after a bounded debugging effort.
+
+When blocked, preserve all verified work, push it, and report the exact blocker plus the next owner action.
+
+## Final deliverable
+
+Do not say “complete” merely because code exists.
+
+Completion means the approved Definition of Done and release gates are evidenced.
+
+At the end, update/create:
+
+- `README.md`
+- `docs/architecture/overview.md`
+- `docs/deployment/cloudflare.md`
+- `docs/qa/release-verification.md`
+- `docs/qa/known-issues.md`
+
+Final response must be concise and include:
+
+```text
+Repo:
+Final commit:
+
+Plan 01: PASS / PARTIAL / BLOCKED
+Plan 02: PASS / PARTIAL / BLOCKED
+Plan 03: PASS / PARTIAL / BLOCKED
+Plan 04: PASS / PARTIAL / BLOCKED
+Plan 05: PASS / PARTIAL / BLOCKED
+Plan 06: PASS / PARTIAL / BLOCKED
+Plan 07: PASS / PARTIAL / BLOCKED
+
+Build:
+Typecheck:
+Lint:
+Unit/Integration:
+E2E:
+Campaign 30/30:
+Content:
+Desktop QA:
+Mobile QA:
+Console errors:
+Asset 404s:
+D1 local:
+Production Cloudflare deploy: NOT RUN unless separately authorized
+
+Known issues:
+Owner actions required:
+```
+
+Do not provide hidden chain-of-thought. Report only concise implementation decisions, changed files, evidence, failures and remaining risks.
+
+Start now by reading the spec and master roadmap, inspecting the current target repository and reference repositories, then execute Plan 01.
