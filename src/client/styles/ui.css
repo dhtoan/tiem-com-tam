@@ -162,3 +162,98 @@
 .btn-primary:hover {
   background: #943220;
 }
+
+/* Incident Dialog */
+.incident-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 320px;
+  max-width: 480px;
+}
+
+.incident-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #deb887;
+  padding-bottom: 8px;
+}
+
+.incident-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #7d2e1f;
+}
+
+.urgency-badge {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.urgency-low {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.urgency-medium {
+  background: #fff8e1;
+  color: #f57f17;
+}
+
+.urgency-high {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.urgency-critical {
+  background: #d50000;
+  color: #ffffff;
+}
+
+.incident-desc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #4a2c11;
+}
+
+.incident-actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.incident-action-btn {
+  background: #faedcd;
+  border: 1px solid #d4a373;
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.incident-action-btn:hover {
+  background: #fdf0d5;
+  border-color: #b84b12;
+  transform: translateY(-1px);
+}
+
+.action-btn-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #7d2e1f;
+}
+
+.action-btn-desc {
+  font-size: 12px;
+  color: #7f5539;
+  margin-top: 2px;
+}
+

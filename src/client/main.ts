@@ -19,11 +19,16 @@ import { purchaseStock } from "./systems/inventory/inventory";
 import { transferToDebtReserve, withdrawDebtReserve } from "./systems/debt/debt";
 import { assignJD, restJD } from "./systems/jd/jd";
 
+import { GameClock } from "./game/time/GameClock";
+import { IncidentController } from "./systems/incidents/IncidentController";
+
 export interface MountedApp {
   game?: Phaser.Game;
   store: GameStore;
   overlayManager: OverlayManager;
   dayRunner: DayRunner;
+  gameClock: GameClock;
+  incidentController: IncidentController;
   destroy: () => void;
 }
 
@@ -53,6 +58,13 @@ export function mountApp(root?: HTMLElement): MountedApp {
 
   const store = new GameStore(initialState);
   const overlayManager = new OverlayManager(uiRoot);
+  const gameClock = new GameClock();
+  const incidentController = new IncidentController(gameClock, overlayManager);
+
+  if (typeof window !== "undefined") {
+    (window as unknown as Record<string, unknown>).__incidentController = incidentController;
+    (window as unknown as Record<string, unknown>).__gameClock = gameClock;
+  }
 
   const openMarket = () => {
     const state = store.getState();
@@ -254,6 +266,8 @@ export function mountApp(root?: HTMLElement): MountedApp {
     store,
     overlayManager,
     dayRunner,
+    gameClock,
+    incidentController,
     destroy: () => {
       hud.destroy();
       overlayManager.destroy();
