@@ -10,6 +10,14 @@ import { loadLocal } from "./state/localSave";
 import { OverlayManager } from "./ui/OverlayManager";
 import { Hud } from "./ui/hud/Hud";
 import { DayRunner } from "./campaign/DayRunner";
+import { createMarketBoardElement } from "./ui/market/MarketBoard";
+import { createDebtPanelElement } from "./ui/debt/DebtPanel";
+import { createJDPanelElement } from "./ui/jd/JDPanel";
+import { createBooksPanelElement } from "./ui/books/BooksPanel";
+import { generateMarket } from "./systems/market/market";
+import { purchaseStock } from "./systems/inventory/inventory";
+import { transferToDebtReserve, withdrawDebtReserve } from "./systems/debt/debt";
+import { assignJD, restJD } from "./systems/jd/jd";
 
 export interface MountedApp {
   game?: Phaser.Game;
@@ -40,14 +48,129 @@ export function mountApp(root?: HTMLElement): MountedApp {
     targetRoot.appendChild(uiRoot);
   }
 
-  // Load existing save or create new state
   const existingSave = loadLocal();
   const initialState = existingSave ?? createInitialState("normal", `run-${Date.now()}`);
 
   const store = new GameStore(initialState);
   const overlayManager = new OverlayManager(uiRoot);
-  const hud = new Hud(uiRoot, store, () => {
-    // Settings modal callback
+
+  const openMarket = () => {
+    const state = store.getState();
+    const market = generateMarket({
+      day: state.campaign.day,
+      difficulty: state.campaign.difficulty,
+      runSeed: state.meta.runSeed,
+    });
+
+    const marketEl = createMarketBoardElement({
+      market,
+      inventory: state.inventory,
+      shopCash: state.economy.shopCash,
+      onBuyIngredient: (ingredientId, quantity, unitCost) => {
+        const total = quantity * unitCost;
+        if (store.getState().economy.shopCash >= total) {
+          const res = purchaseStock({
+            inventory: store.getState().inventory,
+            ingredientId,
+            quantity,
+            unitCost,
+            currentDay: store.getState().campaign.day,
+          });
+
+          store.dispatch((s) => ({
+            ...s,
+            economy: {
+              ...s.economy,
+              shopCash: s.economy.shopCash - total,
+              totalExpenses: s.economy.totalExpenses + total,
+            },
+            inventory: res.inventory,
+          }));
+
+          // Re-render market board with updated cash/inventory
+          openMarket();
+        }
+      },
+      onClose: () => {
+        overlayManager.close("market-board");
+      },
+    });
+
+    overlayManager.open("market-board", marketEl, {
+      closable: true,
+      title: "Chợ Sáng",
+    });
+  };
+
+  const openDebt = () => {
+    const state = store.getState();
+    const debtEl = createDebtPanelElement({
+      debt: state.debt,
+      shopCash: state.economy.shopCash,
+      debtReserve: state.economy.debtReserve,
+      onTransferToReserve: (amount) => {
+        store.dispatch((s) => transferToDebtReserve(s, amount));
+        openDebt();
+      },
+      onWithdrawReserve: (amount) => {
+        store.dispatch((s) => withdrawDebtReserve(s, amount));
+        openDebt();
+      },
+      onClose: () => {
+        overlayManager.close("debt-panel");
+      },
+    });
+
+    overlayManager.open("debt-panel", debtEl, {
+      closable: true,
+      title: "Kèo 30 Ngày",
+    });
+  };
+
+  const openJD = () => {
+    const state = store.getState();
+    const jdEl = createJDPanelElement(state.jd, {
+      onAssignRole: (role) => {
+        store.dispatch((s) => ({
+          ...s,
+          jd: assignJD(s.jd, role),
+        }));
+        openJD();
+      },
+      onRestJD: () => {
+        store.dispatch((s) => ({
+          ...s,
+          jd: restJD(s.jd),
+        }));
+        openJD();
+      },
+      onClose: () => {
+        overlayManager.close("jd-panel");
+      },
+    });
+
+    overlayManager.open("jd-panel", jdEl, {
+      closable: true,
+      title: "JD Trợ Thủ",
+    });
+  };
+
+  const openBooks = () => {
+    const state = store.getState();
+    const booksEl = createBooksPanelElement({
+      books: state.books,
+      onClose: () => {
+        overlayManager.close("books-panel");
+      },
+    });
+
+    overlayManager.open("books-panel", booksEl, {
+      closable: true,
+      title: "Sổ Sách",
+    });
+  };
+
+  const openSettings = () => {
     const settingsDiv = document.createElement("div");
     settingsDiv.innerHTML = `
       <h3 style="color:#7d2e1f; margin-bottom:12px;">CÀI ĐẶT TRÒ CHƠI</h3>
@@ -59,6 +182,14 @@ export function mountApp(root?: HTMLElement): MountedApp {
       closable: true,
       title: "Cài đặt",
     });
+  };
+
+  const hud = new Hud(uiRoot, store, {
+    onOpenMarket: openMarket,
+    onOpenDebt: openDebt,
+    onOpenJD: openJD,
+    onOpenBooks: openBooks,
+    onOpenSettings: openSettings,
   });
 
   const dayRunner = new DayRunner(store, overlayManager);
@@ -67,7 +198,6 @@ export function mountApp(root?: HTMLElement): MountedApp {
   if (typeof window !== "undefined" && typeof HTMLCanvasElement !== "undefined") {
     try {
       game = createGame(gameRoot);
-      // Wait for StallScene ready to bind events
       game.events.once("ready", () => {
         const stallScene = game?.scene.getScene("StallScene") as StallScene;
         if (stallScene) {
@@ -116,7 +246,7 @@ export function mountApp(root?: HTMLElement): MountedApp {
 
   uiRoot.appendChild(navContainer);
 
-  // Start Day 1 loop
+  // Start Day loop
   dayRunner.startDay(store.getState().campaign.day);
 
   return {
