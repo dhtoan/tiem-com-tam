@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "revision": 3,
+  "updatedAt": 1727500000000,
+  "state": {
+    "meta": {
+      "version": 1,
+      "runSeed": "fixture-seed",
+      "createdAt": 1727400000000,
+      "updatedAt": 1727500000000,
+      "saveRevision": 3
+    },
+    "campaign": {
+      "day": 1,
+      "phase": "service",
+      "difficulty": "normal",
+      "completedDays": [],
+      "flags": {},
+      "isEndless": false
+    },
+    "economy": {
+      "shopCash": 1200000,
+      "debtReserve": 0,
+      "totalRevenue": 0,
+      "totalExpenses": 0,
+      "upgrades": []
+    },
+    "debt": {
+      "originalDebt": 30000000,
+      "remainingDebt": 30000000,
+      "milestones": [
+        { "day": 10, "targetAmount": 6000000, "paidAmount": 0, "isPaid": false },
+        { "day": 20, "targetAmount": 9000000, "paidAmount": 0, "isPaid": false },
+        { "day": 30, "targetAmount": 15000000, "paidAmount": 0, "isPaid": false }
+      ],
+      "husbandConfidence": 50,
+      "missedInstallments": 0
+    },
+    "market": {
+      "day": 1,
+      "items": {},
+      "supplierId": "wholesale-regular"
+    },
+    "inventory": {
+      "items": { "com-tam": 30, "suon-heo": 20 },
+      "batches": []
+    },
+    "customers": {
+      "queue": [],
+      "servedCount": 0,
+      "rejectedCount": 0,
+      "abandonedCount": 0
+    },
+    "cooking": {
+      "grillItems": [],
+      "grillCapacity": 4,
+      "plate": { "rice": false, "proteins": [], "toppings": [], "sides": [] }
+    },
+    "jd": {
+      "level": 1,
+      "xp": 0,
+      "stamina": 100,
+      "mood": 100,
+      "trustWithJoy": 80,
+      "assignedRole": "shop-helper",
+      "specializationProgress": {
+        "shop-helper": 0,
+        "service-runner": 0,
+        "cashier": 0,
+        "camera-awareness": 0,
+        "family-support": 0
+      }
+    },
+    "security": {
+      "securityScore": 20,
+      "cameraLevel": 0,
+      "hasLock": false,
+      "hasLighting": false,
+      "theftCount": 0,
+      "incidentHistory": []
+    },
+    "books": {
+      "bookAccuracy": 100,
+      "unrecordedTransactions": 0,
+      "actualBalance": 1200000,
+      "recordedBalance": 1200000,
+      "inspectionsPassed": 0
+    },
+    "neighborhood": {
+      "neighborhoodTrust": 50,
+      "communityLevel": 1,
+      "policeVisits": 0,
+      "localReputation": 50
+    },
+    "family": {
+      "familyTrust": 70,
+      "husbandConfidence": 50,
+      "husbandHelpsInStall": false,
+      "betAccepted": true
+    },
+    "reputation": {
+      "rating": 4.0,
+      "reviewCount": 5,
+      "cleanStreak": 1
+    },
+    "director": {
+      "dailyEventsTriggered": [],
+      "campaignEventsTriggered": {},
+      "lastEventDay": {},
+      "stressScore": 0,
+      "scheduledFollowUps": []
+    },
+    "journal": {
+      "entries": [],
+      "decisions": {}
+    },
+    "settings": {
+      "language": "vi",
+      "masterVolume": 0.8,
+      "musicVolume": 0.7,
+      "sfxVolume": 0.8,
+      "ambienceVolume": 0.6,
+      "uiVolume": 0.8,
+      "slowTimeMode": "standard",
+      "reducedMotion": false
+    }
+  }
+}
