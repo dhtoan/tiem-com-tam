@@ -57,3 +57,14 @@ export interface ResolvedIncident {
   evidenceCaptured: boolean;
   notes: string;
 }
+
+export interface IncidentEvent {
+  id: string;
+  type: "theft" | "disturbance" | "inspection" | "community" | "suspicious_person";
+  title: string;
+  description: string;
+  urgency: "low" | "medium" | "high" | "critical";
+  timeLimitSec?: number;
+  availableActions: IncidentAction[];
+}
+
