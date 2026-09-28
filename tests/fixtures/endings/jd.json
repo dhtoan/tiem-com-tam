@@ -1,0 +1,29 @@
+{
+  "debt": {
+    "originalDebt": 5000000,
+    "remainingDebt": 0,
+    "husbandConfidence": 70,
+    "missedInstallments": 0
+  },
+  "reputation": {
+    "rating": 4.1
+  },
+  "neighborhood": {
+    "neighborhoodTrust": 60
+  },
+  "family": {
+    "familyTrust": 65,
+    "husbandConfidence": 70
+  },
+  "jd": {
+    "level": 3,
+    "trustWithJoy": 92,
+    "stamina": 80,
+    "mood": 85
+  },
+  "campaign": {
+    "flags": {
+      "story_day22_jd_mastered": true
+    }
+  }
+}

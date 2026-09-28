@@ -1,0 +1,24 @@
+{
+  "debt": {
+    "originalDebt": 5000000,
+    "remainingDebt": 0,
+    "husbandConfidence": 85,
+    "missedInstallments": 0
+  },
+  "reputation": {
+    "rating": 4.8
+  },
+  "neighborhood": {
+    "neighborhoodTrust": 88
+  },
+  "books": {
+    "bookAccuracy": 95
+  },
+  "family": {
+    "familyTrust": 85,
+    "husbandConfidence": 85
+  },
+  "jd": {
+    "trustWithJoy": 85
+  }
+}

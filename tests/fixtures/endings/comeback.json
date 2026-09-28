@@ -1,0 +1,21 @@
+{
+  "debt": {
+    "originalDebt": 5000000,
+    "remainingDebt": 3800000,
+    "husbandConfidence": 25,
+    "missedInstallments": 2
+  },
+  "economy": {
+    "shopCash": 30000
+  },
+  "reputation": {
+    "rating": 2.2
+  },
+  "neighborhood": {
+    "neighborhoodTrust": 35
+  },
+  "family": {
+    "familyTrust": 30,
+    "husbandConfidence": 25
+  }
+}
