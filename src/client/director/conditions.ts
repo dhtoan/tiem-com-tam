@@ -60,18 +60,18 @@ export function evaluateCondition(
     case "capability": {
       switch (condition.capability) {
         case "hasActiveGuard":
-          return !!state.security.activeGuardId;
+          return !!state.security?.activeGuardId;
         case "hasLighting":
-          return !!state.security.hasLighting;
+          return !!state.security?.hasLighting;
         case "hasLock":
-          return !!state.security.hasLock;
+          return !!state.security?.hasLock;
         case "cameraLevelGte":
           return (
             typeof condition.value === "number" &&
-            state.security.cameraLevel >= condition.value
+            (state.security?.cameraLevel ?? 0) >= condition.value
           );
         case "jdRoleEq":
-          return state.jd.assignedRole === condition.value;
+          return state.jd?.assignedRole === condition.value;
         default:
           return false;
       }

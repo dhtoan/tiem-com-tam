@@ -15,7 +15,8 @@
     "validate:content": "node scripts/validate-content.mjs",
     "db:local": "wrangler d1 migrations apply DB --local",
     "db:remote": "wrangler d1 migrations apply DB --remote",
-    "simulate:campaign": "node scripts/simulate-campaign.mjs"
+    "simulate:campaign": "node scripts/simulate-campaign.mjs",
+    "fuzz:director": "node scripts/fuzz-director.mjs"
   },
   "dependencies": {
     "phaser": "^3.90.0"

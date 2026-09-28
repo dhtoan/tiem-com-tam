@@ -2,11 +2,15 @@ import type { Difficulty } from "../../shared/types/core";
 import type { EventUrgency } from "../../shared/types/events";
 
 export class DailyEventBudget {
+  public day: number;
+  public difficulty: Difficulty;
   public maxEvents: number;
   public eventsTriggeredToday: number = 0;
   public hasMajorTriggered: boolean = false;
 
-  constructor(public day: number, public difficulty: Difficulty) {
+  constructor(day: number, difficulty: Difficulty) {
+    this.day = day;
+    this.difficulty = difficulty;
     switch (difficulty) {
       case "easy":
         this.maxEvents = 1;
