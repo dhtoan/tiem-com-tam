@@ -195,6 +195,17 @@ export function applyConsequences(
         };
         break;
       }
+
+      case "husbandHelps": {
+        nextState = {
+          ...nextState,
+          family: {
+            ...nextState.family,
+            husbandHelpsInStall: c.helps,
+          },
+        };
+        break;
+      }
     }
   }
 
