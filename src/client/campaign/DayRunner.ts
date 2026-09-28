@@ -5,6 +5,11 @@ import { getCampaignDay } from "../data/campaignDays";
 import { createMorningBriefElement } from "../ui/morning/MorningBrief";
 import { createDaySummaryElement } from "../ui/daySummary/DaySummary";
 import { saveLocal } from "../state/localSave";
+import { resolveEnding } from "../director/EndingResolver";
+import { ENDING_DEFINITIONS } from "../data/endings";
+import { getEndingMontageEntries } from "./journal";
+import { createEndingScreenElement } from "../ui/ending/EndingScreen";
+import { transitionToEndless } from "../game/modes/EndlessMode";
 
 export class DayRunner {
   private store: GameStore;
@@ -149,7 +154,31 @@ export class DayRunner {
     // Auto-save at day end
     saveLocal(this.store.getState());
 
+    if (currentDay === 30 && !this.store.getState().campaign.isEndless) {
+      this.showEndingScreen();
+      return;
+    }
+
     // Advance to next day
     this.startDay(currentDay + 1);
+  }
+
+  public showEndingScreen(): void {
+    const state = this.store.getState();
+    const endingId = resolveEnding(state);
+    const endingDef = ENDING_DEFINITIONS[endingId];
+    const montage = getEndingMontageEntries(state);
+
+    const screenEl = createEndingScreenElement(endingDef, montage, () => {
+      this.overlayManager.close("ending-screen");
+      const nextState = transitionToEndless(this.store.getState(), endingId);
+      this.store.dispatch(() => nextState);
+      this.startDay(31);
+    });
+
+    this.overlayManager.open("ending-screen", screenEl, {
+      closable: false,
+      title: endingDef.title,
+    });
   }
 }

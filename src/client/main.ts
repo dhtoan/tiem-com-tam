@@ -206,6 +206,11 @@ export function mountApp(root?: HTMLElement): MountedApp {
 
   const dayRunner = new DayRunner(store, overlayManager);
 
+  if (typeof window !== "undefined") {
+    (window as unknown as Record<string, unknown>).__dayRunner = dayRunner;
+    (window as unknown as Record<string, unknown>).__store = store;
+  }
+
   let game: Phaser.Game | undefined;
   if (typeof window !== "undefined" && typeof HTMLCanvasElement !== "undefined") {
     try {
