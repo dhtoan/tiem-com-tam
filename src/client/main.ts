@@ -30,6 +30,7 @@ import * as saveApi from "./api/save";
 import * as dailyApi from "./api/daily";
 import * as leaderboardsApi from "./api/leaderboards";
 import * as i18n from "./i18n/i18n";
+import { assetLoader } from "./assets/AssetLoader";
 
 export interface MountedApp {
   game?: Phaser.Game;
@@ -101,6 +102,7 @@ export function mountApp(root?: HTMLElement): MountedApp {
       leaderboards: leaderboardsApi,
     };
     (window as unknown as Record<string, unknown>).__i18n = i18n;
+    (window as unknown as Record<string, unknown>).__assetLoader = assetLoader;
   }
 
   registerServiceWorker({

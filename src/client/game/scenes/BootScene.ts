@@ -1,4 +1,6 @@
 import Phaser from "phaser";
+import { getAssetsByBundle } from "../../assets/manifest";
+import { assetLoader } from "../../assets/AssetLoader";
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -8,9 +10,26 @@ export class BootScene extends Phaser.Scene {
   preload(): void {
     // Generate programmatic fallback textures for vertical slice
     this.createFallbackTextures();
+
+    // Register stall-core and characters-core textures with Phaser loader
+    const coreAssets = [
+      ...getAssetsByBundle("stall-core"),
+      ...getAssetsByBundle("characters-core"),
+    ];
+
+    for (const asset of coreAssets) {
+      if (asset.type === "image") {
+        this.load.image(asset.id, asset.path);
+      }
+    }
   }
 
   create(): void {
+    // Mark core bundles loaded in assetLoader
+    void assetLoader.ensureBundle("boot");
+    void assetLoader.ensureBundle("stall-core");
+    void assetLoader.ensureBundle("characters-core");
+
     this.scene.start("StallScene");
   }
 

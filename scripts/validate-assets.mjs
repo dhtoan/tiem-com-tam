@@ -57,6 +57,19 @@ for (const entry of entries) {
       console.log(`[INIT] Initialized placeholder audio: ${entry.path}`);
     }
   }
+
+  // Size threshold checks
+  if (fs.existsSync(filePath)) {
+    const stats = fs.statSync(filePath);
+    const MAX_IMAGE_BYTES = 1_500_000; // 1.5 MB
+    const MAX_AUDIO_BYTES = 5_000_000; // 5 MB
+
+    if (filePath.endsWith('.png') && stats.size > MAX_IMAGE_BYTES) {
+      console.warn(`[WARN] Image asset ${entry.id} exceeds recommended limit: ${(stats.size / 1024).toFixed(1)} KB > ${MAX_IMAGE_BYTES / 1024} KB`);
+    } else if (filePath.endsWith('.mp3') && stats.size > MAX_AUDIO_BYTES) {
+      console.warn(`[WARN] Audio asset ${entry.id} exceeds recommended limit: ${(stats.size / 1024).toFixed(1)} KB > ${MAX_AUDIO_BYTES / 1024} KB`);
+    }
+  }
 }
 
 if (errors.length > 0) {
