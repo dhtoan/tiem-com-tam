@@ -29,6 +29,7 @@ import * as authApi from "./api/auth";
 import * as saveApi from "./api/save";
 import * as dailyApi from "./api/daily";
 import * as leaderboardsApi from "./api/leaderboards";
+import * as i18n from "./i18n/i18n";
 
 export interface MountedApp {
   game?: Phaser.Game;
@@ -99,6 +100,7 @@ export function mountApp(root?: HTMLElement): MountedApp {
       daily: dailyApi,
       leaderboards: leaderboardsApi,
     };
+    (window as unknown as Record<string, unknown>).__i18n = i18n;
   }
 
   registerServiceWorker({
