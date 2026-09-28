@@ -335,4 +335,56 @@
   margin-top: 10px;
 }
 
+/* Offline badge */
+.offline-badge {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  background: #dc2626;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 9999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+/* Save Conflict Dialog */
+.save-conflict-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.conflict-comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.save-card {
+  background: #f4ede2;
+  border: 2px solid #8c5338;
+  border-radius: 8px;
+  padding: 12px;
+}
+.save-card h3 {
+  margin: 0 0 8px 0;
+  color: #8c5338;
+  font-size: 16px;
+}
+.conflict-inspect-panel {
+  background: #eee4d5;
+  border-radius: 6px;
+  padding: 12px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.conflict-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 

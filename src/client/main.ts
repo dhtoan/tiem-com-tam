@@ -6,7 +6,7 @@ import { StallScene } from "./game/scenes/StallScene";
 import type { StationId } from "../shared/types/core";
 import { GameStore } from "./state/GameStore";
 import { createInitialState } from "./state/createInitialState";
-import { loadLocal } from "./state/localSave";
+import { loadLocal, saveLocal } from "./state/localSave";
 import { OverlayManager } from "./ui/OverlayManager";
 import { Hud } from "./ui/hud/Hud";
 import { DayRunner } from "./campaign/DayRunner";
@@ -22,6 +22,7 @@ import { assignJD, restJD } from "./systems/jd/jd";
 import { GameClock } from "./game/time/GameClock";
 import { IncidentController } from "./systems/incidents/IncidentController";
 import { SaveConflictDialog, type SaveConflictDialogOptions } from "./ui/account/SaveConflictDialog";
+import { createOfflineIndicator } from "./api/networkStatus";
 
 export interface MountedApp {
   game?: Phaser.Game;
@@ -54,16 +55,23 @@ export function mountApp(root?: HTMLElement): MountedApp {
     targetRoot.appendChild(uiRoot);
   }
 
+  const offlineBadge = createOfflineIndicator();
+  uiRoot.appendChild(offlineBadge);
+
   const existingSave = loadLocal();
   const initialState = existingSave ?? createInitialState("normal", `run-${Date.now()}`);
 
   const store = new GameStore(initialState);
+  store.subscribe((state) => {
+    saveLocal(state);
+  });
   const overlayManager = new OverlayManager(uiRoot);
   const gameClock = new GameClock();
   const incidentController = new IncidentController(gameClock, overlayManager);
 
   if (typeof window !== "undefined") {
     (window as unknown as Record<string, unknown>).__incidentController = incidentController;
+    (window as unknown as Record<string, unknown>).__store = store;
     (window as unknown as Record<string, unknown>).__gameClock = gameClock;
     (window as unknown as Record<string, unknown>).__overlayManager = overlayManager;
     (window as unknown as Record<string, unknown>).__showSaveConflictDialog = (options: SaveConflictDialogOptions) => {
