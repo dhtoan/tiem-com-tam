@@ -17,6 +17,8 @@ export interface CampaignState {
   flags: Record<string, boolean | number | string>;
   isEndless: boolean;
   endlessDay?: number;
+  journal?: import("./journal").JournalEntry[];
+  decisions?: import("./journal").DecisionRecord[];
 }
 
 export interface EconomyState {
