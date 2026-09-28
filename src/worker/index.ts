@@ -1,11 +1,18 @@
+import { handleApi } from "./router";
+import type { Env } from "./types";
+
 export default {
-  async fetch(request: Request): Promise<Response> {
+  async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
-    if (url.pathname === "/api/v1/health") {
-      return new Response(JSON.stringify({ status: "ok" }), {
-        headers: { "content-type": "application/json" },
-      });
+
+    if (url.pathname.startsWith("/api/")) {
+      return handleApi(request, env);
     }
-    return new Response("Not found", { status: 404 });
+
+    if (env.ASSETS) {
+      return env.ASSETS.fetch(request);
+    }
+
+    return new Response("Not Found", { status: 404 });
   },
 };
