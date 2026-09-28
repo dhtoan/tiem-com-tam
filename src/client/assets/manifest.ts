@@ -166,6 +166,159 @@ export const ASSET_ENTRIES: AssetEntry[] = [
     bundle: 'stall-core',
     description: 'Sweet and savory garlic chili dipping fish sauce (nước mắm tỏi ớt)'
   },
+  {
+    id: 'plate_tray_takeaway',
+    path: '/assets/food/plates/plate_tray_takeaway.png',
+    type: 'image',
+    width: 256,
+    height: 256,
+    bundle: 'stall-core',
+    description: 'Recyclable takeout meal box'
+  },
+  {
+    id: 'plate_bowl_soup',
+    path: '/assets/food/plates/plate_bowl_soup.png',
+    type: 'image',
+    width: 180,
+    height: 180,
+    bundle: 'stall-core',
+    description: 'Melamine side soup bowl'
+  },
+  {
+    id: 'meat_sliced_pork',
+    path: '/assets/food/ingredients/sliced_pork.png',
+    type: 'image',
+    width: 160,
+    height: 160,
+    bundle: 'stall-core',
+    description: 'Pan-fried thinly sliced pork belly'
+  },
+  {
+    id: 'meat_grilled_chicken',
+    path: '/assets/food/ingredients/grilled_chicken.png',
+    type: 'image',
+    width: 180,
+    height: 180,
+    bundle: 'stall-core',
+    description: 'Lemongrass grilled chicken quarter'
+  },
+  {
+    id: 'meat_grilled_squid',
+    path: '/assets/food/ingredients/grilled_squid.png',
+    type: 'image',
+    width: 180,
+    height: 180,
+    bundle: 'stall-core',
+    description: 'Satay chili grilled baby squid'
+  },
+  {
+    id: 'meat_ribs_honey',
+    path: '/assets/food/ingredients/ribs_honey.png',
+    type: 'image',
+    width: 180,
+    height: 180,
+    bundle: 'stall-core',
+    description: 'Honey glazed barbecue spare ribs'
+  },
+  {
+    id: 'food_crab_cake',
+    path: '/assets/food/ingredients/crab_cake.png',
+    type: 'image',
+    width: 140,
+    height: 140,
+    bundle: 'stall-core',
+    description: 'Steamed seafood and crab cake patty'
+  },
+  {
+    id: 'food_chinese_sausage',
+    path: '/assets/food/ingredients/chinese_sausage.png',
+    type: 'image',
+    width: 120,
+    height: 120,
+    bundle: 'stall-core',
+    description: 'Sweet savory cured Chinese sausage (lạp xưởng)'
+  },
+  {
+    id: 'food_meatball_shumai',
+    path: '/assets/food/ingredients/meatball_shumai.png',
+    type: 'image',
+    width: 130,
+    height: 130,
+    bundle: 'stall-core',
+    description: 'Tender pork shumai meatballs in fresh tomato sauce'
+  },
+  {
+    id: 'food_tofu_meat',
+    path: '/assets/food/ingredients/tofu_meat.png',
+    type: 'image',
+    width: 130,
+    height: 130,
+    bundle: 'stall-core',
+    description: 'Golden fried tofu stuffed with savory minced pork'
+  },
+  {
+    id: 'food_pork_ham',
+    path: '/assets/food/ingredients/pork_ham.png',
+    type: 'image',
+    width: 120,
+    height: 120,
+    bundle: 'stall-core',
+    description: 'Silky steamed pork ham roll (chả lụa)'
+  },
+  {
+    id: 'food_cucumber_slices',
+    path: '/assets/food/ingredients/cucumber_slices.png',
+    type: 'image',
+    width: 120,
+    height: 120,
+    bundle: 'stall-core',
+    description: 'Crisp fresh cucumber diagonal cuts'
+  },
+  {
+    id: 'food_tomato_slices',
+    path: '/assets/food/ingredients/tomato_slices.png',
+    type: 'image',
+    width: 120,
+    height: 120,
+    bundle: 'stall-core',
+    description: 'Juicy ripe red tomato slices'
+  },
+  {
+    id: 'food_soy_sauce',
+    path: '/assets/food/ingredients/soy_sauce.png',
+    type: 'image',
+    width: 100,
+    height: 100,
+    bundle: 'stall-core',
+    description: 'Aromatic seasoned soy sauce with fresh chili'
+  },
+  {
+    id: 'food_chili_paste',
+    path: '/assets/food/ingredients/chili_paste.png',
+    type: 'image',
+    width: 100,
+    height: 100,
+    bundle: 'stall-core',
+    description: 'Spicy roasted shrimp chili oil paste (sa tế)'
+  },
+  {
+    id: 'food_bitter_melon_soup',
+    path: '/assets/food/ingredients/bitter_melon_soup.png',
+    type: 'image',
+    width: 140,
+    height: 140,
+    bundle: 'stall-core',
+    description: 'Traditional bitter melon soup stuffed with pork'
+  },
+  {
+    id: 'food_mustard_soup',
+    path: '/assets/food/ingredients/mustard_soup.png',
+    type: 'image',
+    width: 140,
+    height: 140,
+    bundle: 'stall-core',
+    description: 'Clear pork rib soup with pickled mustard greens'
+  },
 
   // Characters - Core Family
   {

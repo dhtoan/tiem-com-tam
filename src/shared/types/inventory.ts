@@ -7,7 +7,7 @@ export interface IngredientDefinition {
   name: string;
   unit: string;
   basePrice: number;
-  category: "meat" | "rice" | "vegetable" | "condiment" | "topping";
+  category: "meat" | "rice" | "vegetable" | "condiment" | "topping" | "side";
   shelfLifeDays: number;
 }
 

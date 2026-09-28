@@ -19,8 +19,8 @@ const ingContent = checkFile('src/client/data/ingredients.ts', 'Ingredients');
 if (ingContent) {
   const ingMatches = ingContent.match(/id:\s*['"][^'"]+['"]/g) || [];
   console.log(`[INFO] Ingredients count: ${ingMatches.length}`);
-  if (ingMatches.length < 8) {
-    errors.push(`Expected at least 8 foundational ingredients, found ${ingMatches.length}`);
+  if (ingMatches.length < 23) {
+    errors.push(`Expected at least 23 ingredients, found ${ingMatches.length}`);
   }
 }
 
@@ -32,8 +32,8 @@ const recipeContent = checkFile(recipeFile, 'Recipes');
 if (recipeContent) {
   const recipeMatches = recipeContent.match(/recipeId:\s*['"][^'"]+['"]/g) || [];
   console.log(`[INFO] Recipes count: ${recipeMatches.length}`);
-  if (recipeMatches.length < 5) {
-    errors.push(`Expected at least 5 recipes, found ${recipeMatches.length}`);
+  if (recipeMatches.length < 25) {
+    errors.push(`Expected at least 25 recipes, found ${recipeMatches.length}`);
   }
 }
 
