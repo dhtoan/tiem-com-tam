@@ -3,6 +3,7 @@ import { applySecurityHeaders, checkBodySize } from "./middleware/security";
 import { handleHealthCheck } from "./routes/health";
 import { handleAuthRoute } from "./routes/auth";
 import { handleSaveRoute } from "./routes/save";
+import { handleDailyRoute } from "./routes/daily";
 
 export async function handleApi(request: Request, env: Env): Promise<Response> {
   // Guard: body size limit
@@ -28,6 +29,8 @@ export async function handleApi(request: Request, env: Env): Promise<Response> {
       response = await handleAuthRoute(request, env.DB);
     } else if (path === "/api/v1/save") {
       response = await handleSaveRoute(request, env.DB);
+    } else if (path.startsWith("/api/v1/daily")) {
+      response = await handleDailyRoute(request, env.DB, env.JWT_SECRET);
     } else {
       response = new Response(
         JSON.stringify({ error: "Not Found", path }),
