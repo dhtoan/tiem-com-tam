@@ -349,6 +349,15 @@ export const ASSET_ENTRIES: AssetEntry[] = [
     description: 'Má Năm stressed/concerned expression'
   },
   {
+    id: 'char_joy_determined',
+    path: '/assets/characters/joy/joy_determined.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Má Năm resolute determined expression'
+  },
+  {
     id: 'char_jd_neutral',
     path: '/assets/characters/jd/jd_neutral.png',
     type: 'image',
@@ -367,6 +376,24 @@ export const ASSET_ENTRIES: AssetEntry[] = [
     description: 'JD confident capable expression'
   },
   {
+    id: 'char_jd_tired',
+    path: '/assets/characters/jd/jd_tired.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'JD exhausted after long rush hour'
+  },
+  {
+    id: 'char_jd_cheering',
+    path: '/assets/characters/jd/jd_cheering.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'JD energetic celebrating milestone'
+  },
+  {
     id: 'char_husband_neutral',
     path: '/assets/characters/husband/husband_neutral.png',
     type: 'image',
@@ -374,6 +401,15 @@ export const ASSET_ENTRIES: AssetEntry[] = [
     height: 384,
     bundle: 'characters-core',
     description: 'Ba Long (Husband) thoughtful expression'
+  },
+  {
+    id: 'char_husband_happy',
+    path: '/assets/characters/husband/husband_happy.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Ba Long proud supportive smile'
   },
   {
     id: 'char_husband_apron',
@@ -731,6 +767,100 @@ export const ASSET_ENTRIES: AssetEntry[] = [
     height: 384,
     bundle: 'characters-core',
     description: 'Family customer variant 3'
+  },
+
+  // Story Scenes & Key Moments
+  {
+    id: 'story_day01_stall_opening',
+    path: '/assets/story/day01_stall_opening.png',
+    type: 'image',
+    width: 640,
+    height: 360,
+    bundle: 'story-day-range',
+    description: 'Day 1 morning stall opening and 30-day bet announcement'
+  },
+  {
+    id: 'story_day15_rainy_rush',
+    path: '/assets/story/day15_rainy_rush.png',
+    type: 'image',
+    width: 640,
+    height: 360,
+    bundle: 'story-day-range',
+    description: 'Day 15 heavy monsoon rain storm rush hour'
+  },
+  {
+    id: 'story_day25_husband_apron',
+    path: '/assets/story/day25_husband_apron.png',
+    type: 'image',
+    width: 640,
+    height: 360,
+    bundle: 'story-day-range',
+    description: 'Day 25 Ba Long putting on apron to take over grilling'
+  },
+  {
+    id: 'story_day30_grand_finale',
+    path: '/assets/story/day30_grand_finale.png',
+    type: 'image',
+    width: 640,
+    height: 360,
+    bundle: 'story-day-range',
+    description: 'Day 30 final resolution celebration at dusk'
+  },
+
+  // Campaign Endings
+  {
+    id: 'ending_perfect',
+    path: '/assets/endings/ending_perfect.png',
+    type: 'image',
+    width: 800,
+    height: 450,
+    bundle: 'endings',
+    description: 'Perfect Ending: Iconic Saigon Broken Rice Stall Queen'
+  },
+  {
+    id: 'ending_family',
+    path: '/assets/endings/ending_family.png',
+    type: 'image',
+    width: 800,
+    height: 450,
+    bundle: 'endings',
+    description: 'Family Ending: Whole Family United in the Stall'
+  },
+  {
+    id: 'ending_jd',
+    path: '/assets/endings/ending_jd.png',
+    type: 'image',
+    width: 800,
+    height: 450,
+    bundle: 'endings',
+    description: 'JD Ending: Capable Summer Apprentice Right Hand'
+  },
+  {
+    id: 'ending_neighborhood',
+    path: '/assets/endings/ending_neighborhood.png',
+    type: 'image',
+    width: 800,
+    height: 450,
+    bundle: 'endings',
+    description: 'Neighborhood Ending: Heart of the Community Alley'
+  },
+  {
+    id: 'ending_husband_finance',
+    path: '/assets/endings/ending_husband_finance.png',
+    type: 'image',
+    width: 800,
+    height: 450,
+    bundle: 'endings',
+    description: 'Husband Finance Ending: Structured Household Budget Keeper'
+  },
+  {
+    id: 'ending_comeback',
+    path: '/assets/endings/ending_comeback.png',
+    type: 'image',
+    width: 800,
+    height: 450,
+    bundle: 'endings',
+    description: 'Comeback Ending: Resilient New Beginning'
   },
 
   // Audio - Music & Ambience
