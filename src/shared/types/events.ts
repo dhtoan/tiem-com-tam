@@ -77,7 +77,8 @@ export type Consequence =
   | { type: "jdXp"; delta: number }
   | { type: "flag"; key: string; value: boolean | number | string }
   | { type: "scheduleFollowUp"; eventId: string; delayDays: number }
-  | { type: "unlockUpgrade"; upgradeId: string };
+  | { type: "unlockUpgrade"; upgradeId: string }
+  | { type: "missedInstallment"; count?: number };
 
 export interface EventChoice {
   id: string;

@@ -183,6 +183,18 @@ export function applyConsequences(
         }
         break;
       }
+
+      case "missedInstallment": {
+        const increment = c.count ?? 1;
+        nextState = {
+          ...nextState,
+          debt: {
+            ...nextState.debt,
+            missedInstallments: nextState.debt.missedInstallments + increment,
+          },
+        };
+        break;
+      }
     }
   }
 
