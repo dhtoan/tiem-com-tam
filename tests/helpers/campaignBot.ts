@@ -8,7 +8,6 @@ import { applyConsequences } from "../../src/client/director/ConsequenceEngine";
 import { resolveEnding } from "../../src/client/director/EndingResolver";
 import { createDailyEventBudget } from "../../src/client/director/EventBudget";
 import { selectEvent } from "../../src/client/director/EventSelector";
-import type { EventDefinition } from "../../src/shared/types/events";
 
 const ALL_STORY_EVENTS = [
   ...STORY_EVENTS_DAY_01_10,

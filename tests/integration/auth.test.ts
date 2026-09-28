@@ -9,8 +9,7 @@ import {
   hashToken,
   createSessionCookie,
   clearSessionCookie,
-  parseSessionToken,
-  authenticateRequest
+  parseSessionToken
 } from '../../src/worker/auth/sessions';
 import { handleAuthRoute } from '../../src/worker/routes/auth';
 

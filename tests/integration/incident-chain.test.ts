@@ -13,7 +13,6 @@ import {
 } from "../../src/client/systems/neighborhood/neighborhood";
 import type {
   DetectionContext,
-  IncidentAction,
   IncidentEvent,
   ResolvedIncident,
 } from "../../src/shared/types/incidents";

@@ -6,7 +6,6 @@ import type { D1Database } from '@cloudflare/workers-types';
 import {
   createAccount,
   getAccountByEmail,
-  getAccountById,
   createSession,
   getSession,
   deleteSession
@@ -17,8 +16,6 @@ import {
   getDailyChallenge,
   recordDailyRun,
   getDailyLeaderboard,
-  recordEndlessRun,
-  getEndlessLeaderboard,
   createRunToken,
   consumeRunToken
 } from '../../src/worker/db/runs';

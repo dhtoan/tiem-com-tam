@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import { apiRequest } from '../../src/client/api/http';
 import { isOnline, onNetworkStatusChange } from '../../src/client/api/networkStatus';
 

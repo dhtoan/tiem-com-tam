@@ -5,7 +5,6 @@ import {
 } from "../../src/client/systems/books/discrepancies";
 import { resolveBookInspection } from "../../src/client/systems/books/inspection";
 import type { BooksState } from "../../src/shared/types/game-state";
-import type { BookDiscrepancy } from "../../src/client/systems/books/discrepancies";
 
 describe("Bookkeeping Discrepancies and Inspection Resolution", () => {
   const cleanBooks: BooksState = {

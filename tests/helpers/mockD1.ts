@@ -14,60 +14,48 @@ export function createMockD1(): D1Database {
         return stmt as unknown as D1PreparedStatement;
       },
       async first<T = unknown>(colName?: string): Promise<T | null> {
-        try {
-          const sqlStmt = sqlite.prepare(query);
-          const row = sqlStmt.get(...boundValues) as Record<string, unknown> | undefined;
-          if (!row) return null;
-          if (colName) {
-            return (row[colName] as T) ?? null;
-          }
-          return row as T;
-        } catch (err) {
-          throw err;
+        const sqlStmt = sqlite.prepare(query);
+        const row = sqlStmt.get(...boundValues) as Record<string, unknown> | undefined;
+        if (!row) return null;
+        if (colName) {
+          return (row[colName] as T) ?? null;
         }
+        return row as T;
       },
       async all<T = unknown>(): Promise<D1Result<T>> {
-        try {
-          const sqlStmt = sqlite.prepare(query);
-          const rows = sqlStmt.all(...boundValues) as T[];
-          return {
-            results: rows,
-            success: true,
-            meta: {
-              changes: 0,
-              last_row_id: 0,
-              duration: 0,
-              served_by: 'mock',
-              rows_read: rows.length,
-              rows_written: 0,
-              size_after: 0,
-              changed_db: false
-            }
-          };
-        } catch (err) {
-          throw err;
-        }
+        const sqlStmt = sqlite.prepare(query);
+        const rows = sqlStmt.all(...boundValues) as T[];
+        return {
+          results: rows,
+          success: true,
+          meta: {
+            changes: 0,
+            last_row_id: 0,
+            duration: 0,
+            served_by: 'mock',
+            rows_read: rows.length,
+            rows_written: 0,
+            size_after: 0,
+            changed_db: false
+          }
+        };
       },
-      async run<T = unknown>(): Promise<D1Response> {
-        try {
-          const sqlStmt = sqlite.prepare(query);
-          const info = sqlStmt.run(...boundValues);
-          return {
-            success: true,
-            meta: {
-              changes: Number(info.changes),
-              last_row_id: Number(info.lastInsertRowid),
-              duration: 0,
-              served_by: 'mock',
-              rows_read: 0,
-              rows_written: Number(info.changes),
-              size_after: 0,
-              changed_db: Number(info.changes) > 0
-            }
-          };
-        } catch (err) {
-          throw err;
-        }
+      async run(): Promise<D1Response> {
+        const sqlStmt = sqlite.prepare(query);
+        const info = sqlStmt.run(...boundValues);
+        return {
+          success: true,
+          meta: {
+            changes: Number(info.changes),
+            last_row_id: Number(info.lastInsertRowid),
+            duration: 0,
+            served_by: 'mock',
+            rows_read: 0,
+            rows_written: Number(info.changes),
+            size_after: 0,
+            changed_db: Number(info.changes) > 0
+          }
+        };
       }
     };
     return stmt as unknown as D1PreparedStatement;

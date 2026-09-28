@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 import {
-  GUARD_ROSTER,
   getGuardById,
 } from "../../src/client/data/guards";
 import {

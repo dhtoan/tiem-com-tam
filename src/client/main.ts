@@ -25,6 +25,10 @@ import { SaveConflictDialog, type SaveConflictDialogOptions } from "./ui/account
 import { createOfflineIndicator } from "./api/networkStatus";
 import { UpdatePrompt } from "./ui/pwa/UpdatePrompt";
 import { registerServiceWorker } from "./pwa/register";
+import * as authApi from "./api/auth";
+import * as saveApi from "./api/save";
+import * as dailyApi from "./api/daily";
+import * as leaderboardsApi from "./api/leaderboards";
 
 export interface MountedApp {
   game?: Phaser.Game;
@@ -88,6 +92,12 @@ export function mountApp(root?: HTMLElement): MountedApp {
       const prompt = new UpdatePrompt(onApply);
       uiRoot.appendChild(prompt.getElement());
       return prompt;
+    };
+    (window as unknown as Record<string, unknown>).__api = {
+      auth: authApi,
+      save: saveApi,
+      daily: dailyApi,
+      leaderboards: leaderboardsApi,
     };
   }
 
