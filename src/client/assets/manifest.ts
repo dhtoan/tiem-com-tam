@@ -414,6 +414,325 @@ export const ASSET_ENTRIES: AssetEntry[] = [
     description: 'Cô Lan experienced community patrol leader'
   },
 
+  // Community & Incident NPCs
+  {
+    id: 'char_npc_tax_officer',
+    path: '/assets/characters/community/npc_tax_officer.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'dynamic-security',
+    description: 'Fictionalized local business accounting inspector'
+  },
+  {
+    id: 'char_npc_community_warden',
+    path: '/assets/characters/community/npc_community_warden.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'dynamic-security',
+    description: 'Fictionalized neighborhood safety warden'
+  },
+  {
+    id: 'char_npc_hygiene_inspector',
+    path: '/assets/characters/community/npc_hygiene_inspector.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'dynamic-security',
+    description: 'Fictionalized food safety officer'
+  },
+  {
+    id: 'char_incident_pickpocket',
+    path: '/assets/characters/incidents/incident_pickpocket.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'dynamic-security',
+    description: 'Distracted market pickpocket silhouette'
+  },
+  {
+    id: 'char_incident_debt_shadow',
+    path: '/assets/characters/incidents/incident_debt_shadow.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'dynamic-security',
+    description: 'Late-night loan debt collection reminder note'
+  },
+
+  // Customer Appearance Variants
+  {
+    id: 'char_customer_worker_01',
+    path: '/assets/customers/worker_01_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Worker customer variant 1'
+  },
+  {
+    id: 'char_customer_worker_02',
+    path: '/assets/customers/worker_02_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Worker customer variant 2'
+  },
+  {
+    id: 'char_customer_worker_03',
+    path: '/assets/customers/worker_03_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Worker customer variant 3'
+  },
+  {
+    id: 'char_customer_office_01',
+    path: '/assets/customers/office_01_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Office customer variant 1'
+  },
+  {
+    id: 'char_customer_office_02',
+    path: '/assets/customers/office_02_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Office customer variant 2'
+  },
+  {
+    id: 'char_customer_office_03',
+    path: '/assets/customers/office_03_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Office customer variant 3'
+  },
+  {
+    id: 'char_customer_student_01',
+    path: '/assets/customers/student_01_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Student customer variant 1'
+  },
+  {
+    id: 'char_customer_student_02',
+    path: '/assets/customers/student_02_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Student customer variant 2'
+  },
+  {
+    id: 'char_customer_student_03',
+    path: '/assets/customers/student_03_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Student customer variant 3'
+  },
+  {
+    id: 'char_customer_neighbor_01',
+    path: '/assets/customers/neighbor_01_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Neighbor customer variant 1'
+  },
+  {
+    id: 'char_customer_neighbor_02',
+    path: '/assets/customers/neighbor_02_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Neighbor customer variant 2'
+  },
+  {
+    id: 'char_customer_neighbor_03',
+    path: '/assets/customers/neighbor_03_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Neighbor customer variant 3'
+  },
+  {
+    id: 'char_customer_regular_01',
+    path: '/assets/customers/regular_01_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Regular customer variant 1'
+  },
+  {
+    id: 'char_customer_regular_02',
+    path: '/assets/customers/regular_02_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Regular customer variant 2'
+  },
+  {
+    id: 'char_customer_regular_03',
+    path: '/assets/customers/regular_03_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Regular customer variant 3'
+  },
+  {
+    id: 'char_customer_courier_01',
+    path: '/assets/customers/courier_01_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Courier customer variant 1'
+  },
+  {
+    id: 'char_customer_courier_02',
+    path: '/assets/customers/courier_02_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Courier customer variant 2'
+  },
+  {
+    id: 'char_customer_courier_03',
+    path: '/assets/customers/courier_03_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Courier customer variant 3'
+  },
+  {
+    id: 'char_customer_elder_01',
+    path: '/assets/customers/elder_01_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Elder customer variant 1'
+  },
+  {
+    id: 'char_customer_elder_02',
+    path: '/assets/customers/elder_02_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Elder customer variant 2'
+  },
+  {
+    id: 'char_customer_elder_03',
+    path: '/assets/customers/elder_03_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Elder customer variant 3'
+  },
+  {
+    id: 'char_customer_gourmet_01',
+    path: '/assets/customers/gourmet_01_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Gourmet customer variant 1'
+  },
+  {
+    id: 'char_customer_gourmet_02',
+    path: '/assets/customers/gourmet_02_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Gourmet customer variant 2'
+  },
+  {
+    id: 'char_customer_gourmet_03',
+    path: '/assets/customers/gourmet_03_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Gourmet customer variant 3'
+  },
+  {
+    id: 'char_customer_tourist_01',
+    path: '/assets/customers/tourist_01_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Tourist customer variant 1'
+  },
+  {
+    id: 'char_customer_tourist_02',
+    path: '/assets/customers/tourist_02_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Tourist customer variant 2'
+  },
+  {
+    id: 'char_customer_tourist_03',
+    path: '/assets/customers/tourist_03_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Tourist customer variant 3'
+  },
+  {
+    id: 'char_customer_family_01',
+    path: '/assets/customers/family_01_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Family customer variant 1'
+  },
+  {
+    id: 'char_customer_family_02',
+    path: '/assets/customers/family_02_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Family customer variant 2'
+  },
+  {
+    id: 'char_customer_family_03',
+    path: '/assets/customers/family_03_neutral.png',
+    type: 'image',
+    width: 256,
+    height: 384,
+    bundle: 'characters-core',
+    description: 'Family customer variant 3'
+  },
+
   // Audio - Music & Ambience
   {
     id: 'music_stall_theme',
