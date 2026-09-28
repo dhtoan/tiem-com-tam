@@ -4,6 +4,8 @@ import { handleHealthCheck } from "./routes/health";
 import { handleAuthRoute } from "./routes/auth";
 import { handleSaveRoute } from "./routes/save";
 import { handleDailyRoute } from "./routes/daily";
+import { handleEndlessRoute } from "./routes/endless";
+import { handleLeaderboardsRoute } from "./routes/leaderboards";
 
 export async function handleApi(request: Request, env: Env): Promise<Response> {
   // Guard: body size limit
@@ -31,6 +33,10 @@ export async function handleApi(request: Request, env: Env): Promise<Response> {
       response = await handleSaveRoute(request, env.DB);
     } else if (path.startsWith("/api/v1/daily")) {
       response = await handleDailyRoute(request, env.DB, env.JWT_SECRET);
+    } else if (path.startsWith("/api/v1/endless")) {
+      response = await handleEndlessRoute(request, env.DB, env.JWT_SECRET);
+    } else if (path.startsWith("/api/v1/leaderboards")) {
+      response = await handleLeaderboardsRoute(request, env.DB);
     } else {
       response = new Response(
         JSON.stringify({ error: "Not Found", path }),
