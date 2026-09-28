@@ -23,6 +23,8 @@ import { GameClock } from "./game/time/GameClock";
 import { IncidentController } from "./systems/incidents/IncidentController";
 import { SaveConflictDialog, type SaveConflictDialogOptions } from "./ui/account/SaveConflictDialog";
 import { createOfflineIndicator } from "./api/networkStatus";
+import { UpdatePrompt } from "./ui/pwa/UpdatePrompt";
+import { registerServiceWorker } from "./pwa/register";
 
 export interface MountedApp {
   game?: Phaser.Game;
@@ -82,7 +84,19 @@ export function mountApp(root?: HTMLElement): MountedApp {
       });
       return dialog;
     };
+    (window as unknown as Record<string, unknown>).__showUpdatePrompt = (onApply: () => void) => {
+      const prompt = new UpdatePrompt(onApply);
+      uiRoot.appendChild(prompt.getElement());
+      return prompt;
+    };
   }
+
+  registerServiceWorker({
+    onUpdateAvailable: (applyUpdate) => {
+      const prompt = new UpdatePrompt(applyUpdate);
+      uiRoot.appendChild(prompt.getElement());
+    },
+  });
 
   const openMarket = () => {
     const state = store.getState();
