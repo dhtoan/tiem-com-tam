@@ -21,6 +21,7 @@ import { assignJD, restJD } from "./systems/jd/jd";
 
 import { GameClock } from "./game/time/GameClock";
 import { IncidentController } from "./systems/incidents/IncidentController";
+import { SaveConflictDialog, type SaveConflictDialogOptions } from "./ui/account/SaveConflictDialog";
 
 export interface MountedApp {
   game?: Phaser.Game;
@@ -64,6 +65,15 @@ export function mountApp(root?: HTMLElement): MountedApp {
   if (typeof window !== "undefined") {
     (window as unknown as Record<string, unknown>).__incidentController = incidentController;
     (window as unknown as Record<string, unknown>).__gameClock = gameClock;
+    (window as unknown as Record<string, unknown>).__overlayManager = overlayManager;
+    (window as unknown as Record<string, unknown>).__showSaveConflictDialog = (options: SaveConflictDialogOptions) => {
+      const dialog = new SaveConflictDialog(options);
+      overlayManager.open("save-conflict", dialog.getElement(), {
+        closable: false,
+        title: "Xung đột bản lưu đám mây",
+      });
+      return dialog;
+    };
   }
 
   const openMarket = () => {
