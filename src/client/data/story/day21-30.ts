@@ -196,10 +196,22 @@ export const STORY_EVENTS_DAY_21_30: EventDefinition[] = [
         label: "Thanh toán dứt điểm toàn bộ khoản nợ còn lại!",
         description: "Joy chính thức làm chủ tiệm cơm tấm Sài Gòn rạng rỡ!",
         consequences: [
-          { type: "cash", amount: -2_500_000 },
+          { type: "debt", delta: -100_000_000 },
           { type: "familyTrust", delta: 30 },
           { type: "husbandConfidence", delta: 30 },
           { type: "flag", key: "story_day30_resolved", value: true },
+        ],
+      },
+      {
+        id: "day30-incomplete-final",
+        label: "Chỉ gom góp thanh toán được một phần nợ...",
+        description: "Khoản nợ vẫn chưa thể dứt điểm trong 30 ngày.",
+        consequences: [
+          { type: "debt", delta: -1_000_000 },
+          { type: "missedInstallment", count: 1 },
+          { type: "husbandConfidence", delta: -20 },
+          { type: "familyTrust", delta: -10 },
+          { type: "flag", key: "story_day30_resolved", value: false },
         ],
       },
     ],

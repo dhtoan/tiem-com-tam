@@ -241,6 +241,7 @@ export const STORY_EVENTS_DAY_01_10: EventDefinition[] = [
         description: "Chồng gật đầu hài lòng, mối quan hệ gia đình cởi mở hơn.",
         consequences: [
           { type: "cash", amount: -1_000_000 },
+          { type: "debt", delta: -1_000_000 },
           { type: "husbandConfidence", delta: 20 },
           { type: "familyTrust", delta: 15 },
           { type: "flag", key: "story_day10_milestone_passed", value: true },

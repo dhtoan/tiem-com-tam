@@ -251,6 +251,7 @@ export const STORY_EVENTS_DAY_11_20: EventDefinition[] = [
         description: "Chồng vô cùng bất ngờ và bắt đầu nể phục nghị lực của Joy.",
         consequences: [
           { type: "cash", amount: -1_500_000 },
+          { type: "debt", delta: -1_500_000 },
           { type: "husbandConfidence", delta: 25 },
           { type: "familyTrust", delta: 20 },
           { type: "flag", key: "story_day20_milestone_passed", value: true },
@@ -262,6 +263,7 @@ export const STORY_EVENTS_DAY_11_20: EventDefinition[] = [
         description: "Chồng lắc đầu không vui nhưng cho Joy thêm cơ hội cuối.",
         consequences: [
           { type: "cash", amount: -500_000 },
+          { type: "debt", delta: -500_000 },
           { type: "husbandConfidence", delta: -15 },
           { type: "missedInstallment", count: 1 },
           { type: "flag", key: "story_day20_milestone_partial", value: true },

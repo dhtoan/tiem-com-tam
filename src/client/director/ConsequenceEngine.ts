@@ -206,6 +206,17 @@ export function applyConsequences(
         };
         break;
       }
+
+      case "debt": {
+        nextState = {
+          ...nextState,
+          debt: {
+            ...nextState.debt,
+            remainingDebt: Math.max(0, nextState.debt.remainingDebt + c.delta),
+          },
+        };
+        break;
+      }
     }
   }
 

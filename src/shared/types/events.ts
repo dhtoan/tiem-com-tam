@@ -79,7 +79,8 @@ export type Consequence =
   | { type: "scheduleFollowUp"; eventId: string; delayDays: number }
   | { type: "unlockUpgrade"; upgradeId: string }
   | { type: "missedInstallment"; count?: number }
-  | { type: "husbandHelps"; helps: boolean };
+  | { type: "husbandHelps"; helps: boolean }
+  | { type: "debt"; delta: number };
 
 export interface EventChoice {
   id: string;
