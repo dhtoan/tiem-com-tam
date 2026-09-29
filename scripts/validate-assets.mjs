@@ -35,48 +35,39 @@ while ((match = entryRegex.exec(manifestContent)) !== null) {
 console.log(`[INFO] Found ${entries.length} assets registered in manifest.`);
 
 for (const entry of entries) {
-  // Strip leading slash to locate file within publicDir
   const relativePath = entry.path.replace(/^\/+/, '');
   const filePath = path.join(publicDir, relativePath);
 
   if (!fs.existsSync(filePath)) {
-    // If the file does not exist yet on disk during development, create a placeholder directory/file if needed or record error
-    // For now, record warning or create placeholder asset so pipeline passes
-    const dir = path.dirname(filePath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    // If it's missing, write an empty or 1x1 placeholder
-    if (filePath.endsWith('.png')) {
-      // 1x1 transparent PNG buffer
-      const png1x1 = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64');
-      fs.writeFileSync(filePath, png1x1);
-      console.log(`[INIT] Initialized placeholder asset: ${entry.path}`);
-    } else if (filePath.endsWith('.mp3')) {
-      fs.writeFileSync(filePath, Buffer.alloc(128));
-      console.log(`[INIT] Initialized placeholder audio: ${entry.path}`);
-    }
-  }
-
-  // Size threshold checks
-  if (fs.existsSync(filePath)) {
+    errors.push(`Missing asset on disk: ${entry.path} (ID: ${entry.id})`);
+  } else {
     const stats = fs.statSync(filePath);
-    const MAX_IMAGE_BYTES = 1_500_000; // 1.5 MB
+    if (stats.size === 0) {
+      errors.push(`Empty 0-byte asset file: ${entry.path} (ID: ${entry.id})`);
+    }
+
+    const MAX_IMAGE_BYTES = 2_000_000; // 2 MB
     const MAX_AUDIO_BYTES = 5_000_000; // 5 MB
 
     if (filePath.endsWith('.png') && stats.size > MAX_IMAGE_BYTES) {
-      console.warn(`[WARN] Image asset ${entry.id} exceeds recommended limit: ${(stats.size / 1024).toFixed(1)} KB > ${MAX_IMAGE_BYTES / 1024} KB`);
+      console.warn(`[WARN] Image asset ${entry.id} exceeds recommended limit: ${(stats.size / 1024).toFixed(1)} KB`);
     } else if (filePath.endsWith('.mp3') && stats.size > MAX_AUDIO_BYTES) {
-      console.warn(`[WARN] Audio asset ${entry.id} exceeds recommended limit: ${(stats.size / 1024).toFixed(1)} KB > ${MAX_AUDIO_BYTES / 1024} KB`);
+      console.warn(`[WARN] Audio asset ${entry.id} exceeds recommended limit: ${(stats.size / 1024).toFixed(1)} KB`);
     }
   }
 }
 
+// Verify favicon exists in public
+const faviconPath = path.join(publicDir, 'favicon.ico');
+if (!fs.existsSync(faviconPath)) {
+  errors.push('Missing favicon.ico in public directory');
+}
+
 if (errors.length > 0) {
-  console.error(`[FAIL] Asset validation failed with ${errors.length} error(s):`);
-  errors.forEach(e => console.error(`  - ${e}`));
+  console.error(`\n[FAIL] Asset validation failed with ${errors.length} error(s):`);
+  errors.forEach((e) => console.error(`  - ${e}`));
   process.exit(1);
 }
 
-console.log(`[PASS] All ${entries.length} manifest assets validated successfully on disk.`);
+console.log(`[PASS] All ${entries.length} manifest assets strictly validated on disk (0 missing, 0 empty).`);
 process.exit(0);

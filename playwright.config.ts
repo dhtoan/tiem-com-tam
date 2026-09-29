@@ -9,6 +9,7 @@ export default defineConfig({
     command: "npm run build && npx vite preview --host 127.0.0.1 --port 4173",
     port: 4173,
     reuseExistingServer: true,
+    timeout: 120000,
   },
   projects: [
     {
