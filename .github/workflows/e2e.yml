@@ -1,0 +1,43 @@
+name: Playwright E2E Release Gate
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  e2e:
+    name: End-to-End Browser Regression Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers with System Dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Build Application for Production Server Preview
+        run: npm run build
+
+      - name: Run Playwright E2E Suite
+        run: npx playwright test
+
+      - name: Upload Test Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
