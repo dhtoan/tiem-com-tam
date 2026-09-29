@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "revision": 12,
+  "updatedAt": 1727586400000,
+  "state": {
+    "meta": {
+      "version": 1,
+      "runSeed": "fixture-day10-seed",
+      "createdAt": 1727500000000,
+      "updatedAt": 1727586400000,
+      "saveRevision": 12
+    },
+    "campaign": {
+      "day": 10,
+      "phase": "closing",
+      "difficulty": "normal",
+      "completedDays": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "flags": {
+        "betAccepted": true,
+        "first_wholesaler_unlocked": true,
+        "day10_milestone_settled": true
+      },
+      "isEndless": false,
+      "journal": [
+        {
+          "id": "j-1",
+          "day": 1,
+          "title": "Khai trương quán cơm tấm",
+          "content": "Ngày đầu tiên mở quán thành công.",
+          "timestamp": 1727500000000
+        },
+        {
+          "id": "j-10",
+          "day": 10,
+          "title": "Cột mốc ngày 10",
+          "content": "Đã gom đủ 6.000.000đ trả đợt 1 cho chủ nợ.",
+          "timestamp": 1727586400000
+        }
+      ],
+      "decisions": [
+        {
+          "eventId": "story-day-10",
+          "choiceId": "day10-pay-full",
+          "day": 10,
+          "timestamp": 1727586400000
+        }
+      ]
+    },
+    "economy": {
+      "shopCash": 3500000,
+      "debtReserve": 0,
+      "totalRevenue": 12800000,
+      "totalExpenses": 4300000,
+      "upgrades": ["prep-board-1"]
+    },
+    "debt": {
+      "originalDebt": 30000000,
+      "remainingDebt": 24000000,
+      "milestones": [
+        { "day": 10, "targetAmount": 6000000, "paidAmount": 6000000, "isPaid": true },
+        { "day": 20, "targetAmount": 9000000, "paidAmount": 0, "isPaid": false },
+        { "day": 30, "targetAmount": 15000000, "paidAmount": 0, "isPaid": false }
+      ],
+      "husbandConfidence": 65,
+      "missedInstallments": 0
+    },
+    "market": {
+      "day": 10,
+      "items": {},
+      "supplierId": "wholesale-regular"
+    },
+    "inventory": {
+      "items": { "com-tam": 45, "suon-heo": 30, "trung-ga": 20 },
+      "batches": []
+    },
+    "customers": {
+      "queue": [],
+      "servedCount": 180,
+      "rejectedCount": 2,
+      "abandonedCount": 1
+    },
+    "cooking": {
+      "grillItems": [],
+      "grillCapacity": 4,
+      "plate": { "rice": false, "proteins": [], "toppings": [], "sides": [] }
+    },
+    "jd": {
+      "level": 2,
+      "xp": 280,
+      "stamina": 85,
+      "mood": 90,
+      "trustWithJoy": 88,
+      "assignedRole": "service-runner",
+      "specializationProgress": {
+        "shop-helper": 100,
+        "service-runner": 120,
+        "cashier": 20,
+        "camera-awareness": 0,
+        "family-support": 40
+      }
+    },
+    "security": {
+      "securityScore": 35,
+      "cameraLevel": 1,
+      "hasLock": true,
+      "hasLighting": true,
+      "theftCount": 0,
+      "incidentHistory": []
+    },
+    "books": {
+      "bookAccuracy": 98,
+      "unrecordedTransactions": 0,
+      "actualBalance": 3500000,
+      "recordedBalance": 3500000,
+      "inspectionsPassed": 1
+    },
+    "neighborhood": {
+      "neighborhoodTrust": 65,
+      "communityLevel": 1,
+      "policeVisits": 1,
+      "localReputation": 65
+    },
+    "family": {
+      "familyTrust": 78,
+      "husbandConfidence": 65,
+      "husbandHelpsInStall": false,
+      "betAccepted": true
+    },
+    "reputation": {
+      "rating": 4.3,
+      "reviewCount": 42,
+      "cleanStreak": 8
+    },
+    "director": {
+      "dailyEventsTriggered": ["story-day-10"],
+      "campaignEventsTriggered": { "story-day-10": 1, "evt-patrol-intro": 1 },
+      "lastEventDay": { "story-day-10": 10, "evt-patrol-intro": 6 },
+      "stressScore": 25,
+      "scheduledFollowUps": []
+    },
+    "journal": {
+      "entries": [],
+      "decisions": {}
+    },
+    "settings": {
+      "language": "vi",
+      "masterVolume": 0.8,
+      "musicVolume": 0.7,
+      "sfxVolume": 0.8,
+      "ambienceVolume": 0.6,
+      "uiVolume": 0.8,
+      "slowTimeMode": "standard",
+      "reducedMotion": false
+    }
+  }
+}

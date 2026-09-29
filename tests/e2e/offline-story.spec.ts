@@ -59,5 +59,10 @@ test.describe('Offline Story Mode E2E', () => {
     // 6. Reconnect network and verify offline badge disappears
     await context.setOffline(false);
     await expect(offlineBadge).not.toBeVisible();
+
+    // 7. Reload page and assert persisted state is restored
+    await page.reload();
+    const reloadedHud = page.locator('.game-hud');
+    await expect(reloadedHud.locator('.cash-value')).toContainText('777.000');
   });
 });

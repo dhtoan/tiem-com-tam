@@ -53,4 +53,42 @@ test.describe('Cloud Save Conflict UI E2E', () => {
     const recordedChoice = await page.evaluate(() => (window as any).__conflictChoice);
     expect(recordedChoice).toBe('use_cloud');
   });
+
+  test('renders conflict options and allows keeping local device save', async ({ page }) => {
+    await page.goto('/');
+
+    const backdrop = page.locator('.overlay-backdrop');
+    if (await backdrop.isVisible()) {
+      await page.keyboard.press('Escape');
+      await expect(backdrop).not.toBeVisible();
+    }
+
+    await page.evaluate(() => {
+      const win = window as any;
+      win.__conflictChoice = null;
+
+      win.__showSaveConflictDialog({
+        localMeta: { day: 10, money: 3500000, reputation: 90, updatedAt: 1727600000000 },
+        cloudMeta: { day: 8, money: 2000000, reputation: 80, revision: 2, updatedAt: 1727550000000 },
+        localSaveJson: JSON.stringify({ day: 10, money: 3500000 }),
+        cloudSaveJson: JSON.stringify({ day: 8, money: 2000000 }),
+        onChoice: (choice: string) => {
+          win.__conflictChoice = choice;
+          if (choice !== 'inspect') {
+            win.__overlayManager.close('save-conflict');
+          }
+        }
+      });
+    });
+
+    const dialog = page.locator('[data-testid="save-conflict-dialog"]');
+    await expect(dialog).toBeVisible();
+
+    const keepDeviceBtn = page.locator('[data-action="keep-device"]');
+    await keepDeviceBtn.click();
+
+    await expect(dialog).not.toBeVisible();
+    const recordedChoice = await page.evaluate(() => (window as any).__conflictChoice);
+    expect(recordedChoice).toBe('keep_device');
+  });
 });
