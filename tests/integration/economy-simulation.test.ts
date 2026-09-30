@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { runCampaignSimulation } from '../helpers/strategies';
-import { createInitialState } from '../../src/client/state/createInitialState';
 
 describe('Headless Campaign Balance Simulation', () => {
   it('produces deterministic output with fixed seed and strategy', () => {
